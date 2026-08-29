@@ -73,6 +73,75 @@ Research generator/
 ├── README.md
 └── .gitignore
 
+Coding Working Flow
+## 🔄 Complete Working Flow
+
+```text
+User enters a topic
+        ↓
+Frontend (app.py)
+        ↓
+FastAPI API (api/report.py)
+        ↓
+Report Service (services/report_service.py)
+        ↓
+CrewAI (crew.py)
+        ↓
+Agents (agents.py)
+        ↓
+Tasks (tasks.py)
+        ↓
+Research Agent → Tavily Search (tools.py)
+        ↓
+Analyst Agent
+        ↓
+Writer Agent
+        ↓
+Editor Agent
+        ↓
+Final Research Report
+        ↓
+report_service.py
+   ┌────┴────┐
+   ↓         ↓
+  .md       .pdf
+   │         │
+   └────┬────┘
+        ↓
+SQLite Database
+        ↓
+Frontend
+        ↓
+Download PDF
+
+📂 What Each Python File Does
+           File	                            Purpose
+Frontend/app.py	Streamlit UI. Takes the topic and displays the result.
+
+Backend/main.py	Starts the FastAPI application and loads the API routes.
+
+Backend/api/report.py	Handles report generate, view, download, and delete requests.
+
+Backend/services/report_service.py	Main business logic. Runs CrewAI, saves .md, 
+creates .pdf, and stores report information.
+
+Backend/crew.py	Connects the agents and tasks and runs the CrewAI workflow.
+
+Backend/agents.py	Defines the Research, Analyst, Writer, and Editor agents.
+
+Backend/tasks.py	Defines what each agent has to do.
+
+Backend/tools.py	Configures the Tavily search and extraction tools.
+
+Backend/config.py	Loads API keys and model configuration from .env.
+
+Backend/models.py	Defines the SQLite database table using SQLAlchemy.
+
+Backend/schemas.py	Defines API request and response formats using Pydantic.
+
+Backend/database.py	Creates and manages the database connection.
+
+Backend/utils/pdf_generator.py	Converts the final Markdown report into a PDF.
 
 ⚙️ Setup
 
